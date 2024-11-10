@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Análises</title>
+</head>
+<body>
+    <h1>Relatório de Análises</h1>
+
+    <h2>Estatísticas Gerais</h2>
+    <ul>
+        <li>Total de Análises: {{ estatisticas.total }}</li>
+        <li>Análises Completas: {{ estatisticas.completas }}</li>
+        <li>Análises Pendentes: {{ estatisticas.pendentes }}</li>
+    </ul>
+
+    <h2>Relatório Diário</h2>
+    <ul>
+        {% for item in relatorio_diario %}
+            <li>{{ item.tipo }} para {{ item.paciente }} - {{ item.status }}</li>
+        {% empty %}
+            <li>Sem análises para o último dia.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Relatório Semanal</h2>
+    <ul>
+        {% for item in relatorio_semanal %}
+            <li>{{ item.tipo }} para {{ item.paciente }} - {{ item.status }}</li>
+        {% empty %}
+            <li>Sem análises para a última semana.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Relatório Mensal</h2>
+    <ul>
+        {% for item in relatorio_mensal %}
+            <li>{{ item.tipo }} para {{ item.paciente }} - {{ item.status }}</li>
+        {% empty %}
+            <li>Sem análises para o último mês.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Relatório Anual</h2>
+    <ul>
+        {% for item in relatorio_anual %}
+            <li>{{ item.tipo }} para {{ item.paciente }} - {{ item.status }}</li>
+        {% empty %}
+            <li>Sem análises para o último ano.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

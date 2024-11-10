@@ -1,0 +1,53 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Estoque</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Estoque de Materiais e Consumíveis</h1>
+    <div>
+        <h2>Materiais</h2>
+        {{ fig_materiais|safe }}
+    </div>
+    <div>
+        <h2>Consumíveis</h2>
+        {{ fig_consumiveis|safe }}
+    </div>
+<!-- dashboard.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Painel de Controle</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Estoque Crítico</h5>
+                    <p class="card-text">{{ estoque_critico }} itens com estoque baixo</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Validade Próxima</h5>
+                    <p class="card-text">{{ validade_proxima }} itens próximos do vencimento</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Análises Pendentes</h5>
+                    <p class="card-text">{{ analises_pendentes }} análises aguardando conclusão</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

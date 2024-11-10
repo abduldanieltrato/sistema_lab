@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang = "pt">
+<head>
+  <meta charset = "UTF-8">
+  <title>Pacientes</title>
+        <style>
+        * {
+        background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Paciente</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+{% if messages %}
+    <div class="alert alert-info">
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if user.has_perm('view_paciente') %}
+    <a href="{% url 'gerar_relatorio_pacientes' %}" class="btn btn-primary">Relatório de Pacientes</a>
+{% endif %}
+{% if user.has_perm('view_analise') %}
+    <a href="{% url 'gerar_relatorio_analises' %}" class="btn btn-primary">Relatório de Análises</a>
+{% endif %}
+</body>
+</html>

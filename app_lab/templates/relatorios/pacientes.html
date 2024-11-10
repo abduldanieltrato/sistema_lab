@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Pacientes</title>
+</head>
+<body>
+    <h1>Relatório de Pacientes</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Data de Criação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paciente in pacientes %}
+            <tr>
+                <td>{{ paciente.nome }}</td>
+                <td>{{ paciente.data_nascimento }}</td>
+                <td>{{ paciente.endereco }}</td>
+                <td>{{ paciente.telefone }}</td>
+                <td>{{ paciente.email }}</td>
+                <td>{{ paciente.criado_em }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% if user.has_perm('view_paciente') %}
+    <a href="{% url 'gerar_relatorio_pacientes' %}" class="btn btn-primary">Relatório de Pacientes</a>
+{% endif %}
+{% if user.has_perm('view_analise') %}
+    <a href="{% url 'gerar_relatorio_analises' %}" class="btn btn-primary">Relatório de Análises</a>
+{% endif %}
+</html>

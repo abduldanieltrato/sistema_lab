@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Consumíveis</title>
+</head>
+<body>
+    <h1>Relatório de Consumíveis</h1>
+
+    <h2>Relatório Diário</h2>
+    <ul>
+        {% for consumivel in relatorio_diario %}
+            <li>
+                <strong>Nome:</strong> {{ consumivel.nome }}<br>
+                <strong>Quantidade:</strong> {{ consumivel.quantidade }}<br>
+                <strong>Descrição:</strong> {{ consumivel.descricao }}<br>
+                <strong>Data de Cadastro:</strong> {{ consumivel.data_cadastro }}<br>
+            </li>
+        {% empty %}
+            <li>Nenhum consumível registrado no último dia.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Relatórios Semanal, Mensal e Anual podem seguir a mesma estrutura -->
+</body>
+</html>

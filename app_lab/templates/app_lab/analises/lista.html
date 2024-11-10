@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset = "UTF-8">
+  <title>Analises</title>
+</head>
+<body>
+    <h1>Análises</h1>
+<a href="{% url 'criar_analise' %}">Nova Análise</a>
+<ul>
+    {% for analise in analises %}
+        <li>{{ analise.tipo }} - {{ analise.paciente.nome }}
+            <a href="{% url 'editar_analise' analise.pk %}">Editar</a>
+            <a href="{% url 'excluir_analise' analise.pk %}">Excluir</a>
+        </li>
+    {% endfor %}
+</ul>
+{% if messages %}
+    <div class="alert alert-info">
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if user.has_perm('view_paciente') %}
+    <a href="{% url 'gerar_relatorio_pacientes' %}" class="btn btn-primary">Relatório de Pacientes</a>
+{% endif %}
+{% if user.has_perm('view_analise') %}
+    <a href="{% url 'gerar_relatorio_analises' %}" class="btn btn-primary">Relatório de Análises</a>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Pacientes{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Pacientes</h1>
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+    <a href="{% url 'listar_pacientes' %}" class="btn btn-secondary">Limpar</a>
+    <a href="{% url 'listar_pacientes' %}">Listar Pacientes</a>
+</form>
+<a href="{% url 'criar_paciente' %}" class="btn btn-primary mb-3">Novo Paciente</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Data de Nascimento</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paciente in pacientes %}
+        <tr>
+            <td>{{ paciente.nome }}</td>
+            <td>{{ paciente.data_nascimento }}</td>
+            <td>{{ paciente.telefone }}</td>
+            <td>{{ paciente.email }}</td>
+            <td>
+                <a href="{% url 'editar_paciente' paciente.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'excluir_paciente' paciente.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if pacientes.has_other_pages %}
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    {% if pacientes.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ pacientes.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    {% endif %}
+    {% for num in pacientes.paginator.page_range %}
+      <li class="page-item {% if pacientes.number == num %}active{% endif %}">
+        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+      </li>
+    {% endfor %}
+    {% if pacientes.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ pacientes.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+{% endblock %}
+{% if messages %}
+    <div class="alert alert-info">
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<a href="{% url 'exportar_pacientes_csv' %}" class="btn btn-success">Exportar CSV</a>
+{% if user.has_perm('view_paciente') %}
+    <a href="{% url 'gerar_relatorio_pacientes' %}" class="btn btn-primary">Relatório de Pacientes</a>
+{% endif %}
+{% if user.has_perm('view_analise') %}
+    <a href="{% url 'gerar_relatorio_analises' %}" class="btn btn-primary">Relatório de Análises</a>
+{% endif %}
+{% if user.has_perm('view_paciente') %}
+    <a href="{% url 'gerar_relatorio_pacientes' %}" class="btn btn-primary">Relatório de Pacientes</a>
+{% endif %}
+{% if user.has_perm('view_analise') %}
+    <a href="{% url 'gerar_relatorio_analises' %}" class="btn btn-primary">Relatório de Análises</a>
+{% endif %}

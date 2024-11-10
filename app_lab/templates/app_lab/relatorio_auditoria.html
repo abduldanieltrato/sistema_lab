@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relatório de Auditoria</title>
+</head>
+<body>
+    <h1>Relatório de Auditoria</h1>
+    <table>
+        <tr>
+            <th>Usuário</th>
+            <th>Ação</th>
+            <th>Objeto</th>
+            <th>Data</th>
+        </tr>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.usuario }}</td>
+            <td>{{ log.acao }}</td>
+            <td>{{ log.objeto_afetado }}</td>
+            <td>{{ log.data_acao }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

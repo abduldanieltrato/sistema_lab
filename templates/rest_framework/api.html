@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang = "pt">
+<head>
+  <meta charset = "UTF-8">
+  <title>api</title>
+</head>
+<body>
+{% if user.has_perm('view_paciente') %}
+    <a href="{% url 'gerar_relatorio_pacientes' %}" class="btn btn-primary">Relatório de Pacientes</a>
+{% endif %}
+{% if user.has_perm('view_analise') %}
+    <a href="{% url 'gerar_relatorio_analises' %}" class="btn btn-primary">Relatório de Análises</a>
+{% endif %}
+    <h1>
+        api.html
+    </h1>
+</body>
+</html>

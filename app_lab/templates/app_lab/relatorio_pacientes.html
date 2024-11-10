@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Pacientes</title>
+</head>
+<body>
+    <h1>Relatório de Pacientes</h1>
+
+    <h2>Relatório Diário</h2>
+    <ul>
+        {% for paciente in relatorio_diario %}
+            <li>
+                <strong>Nome:</strong> {{ paciente.nome }}<br>
+                <strong>Data de Nascimento:</strong> {{ paciente.data_nascimento }}<br>
+                <strong>Endereço:</strong> {{ paciente.endereco }}<br>
+                <strong>Telefone:</strong> {{ paciente.telefone }}<br>
+                <strong>Email:</strong> {{ paciente.email }}<br>
+                <strong>Data de Cadastro:</strong> {{ paciente.data_cadastro }}<br>
+                <strong>Análises:</strong>
+                <ul>
+                    {% for analise in paciente.analises %}
+                        <li>{{ analise.tipo }} - Status: {{ analise.status }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% empty %}
+            <li>Nenhum paciente registrado no último dia.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Relatórios Semanal, Mensal, e Anual podem ser estruturados da mesma forma -->
+
+</body>
+</html>
